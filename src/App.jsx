@@ -11,6 +11,7 @@ import { Styles } from './pages/Styles';
 import { DocumentationBlock } from './components/learning/DocumentationBlock';
 import { formsBlock } from './data/formsLessons';
 import { architectureBlock } from './data/architectureLessons';
+import { performanceBlock } from './data/performanceLessons';
 
 export const App = () => {
     const blockNumber = Number(
@@ -27,6 +28,7 @@ export const App = () => {
     if (blockNumber === 8) return <Styles />;
     if (blockNumber === 9) return <DocumentationBlock block={formsBlock} />;
     if (blockNumber === 10) return <DocumentationBlock block={architectureBlock} />;
+    if (blockNumber === 11) return <DocumentationBlock block={performanceBlock} />;
     if (blockNumber >= 2 && blockNumber <= 13) return <CourseBlock />;
 
     return <LandingPage />;

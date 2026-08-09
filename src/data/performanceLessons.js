@@ -1,0 +1,12 @@
+const lines = parts => parts.join('\n');
+const lesson = (number, id, title, summary, example) => ({ id, number: String(number).padStart(2, '0'), title, summary, concepts: [['Concepto', summary], ['Criterio', 'Mide primero con React DevTools antes de optimizar.']], example, exercise: { title: `Practica: ${title}`, instructions: 'Completa el patrón de rendimiento mostrado.', language: 'jsx', initialCode: '// Escribe aquí tu solución', solution: example, patterns: ['export|const|function'], hint: 'Evita optimizaciones prematuras y conserva dependencias correctas.', execution: 'validation' } });
+export const performanceBlock = { number: 11, title: 'Rendimiento', summary: 'Mide el trabajo de React y aplica optimizaciones solo donde aporten una mejora real.', lessons: [
+lesson(1, 'rerenders', 'Re-renderizados', 'Un componente se renderiza por cambios de estado, props o contexto.', lines(['const Dashboard = () => {', '  const [query, setQuery] = useState("");', '  return <Search query={query} />;', '};'])),
+lesson(2, 'react-memo', 'React.memo', 'React.memo evita renders de un hijo cuando sus props no han cambiado.', lines(['const CourseCard = memo(({ course }) => <article>{course.title}</article>);'])),
+lesson(3, 'memo-callback-criterion', 'useMemo y useCallback con criterio', 'Memoriza cálculos o callbacks solo ante un coste medido o referencias importantes.', lines(['const filtered = useMemo(() => courses.filter(matches), [courses, matches]);'])),
+lesson(4, 'lazy-loading', 'Lazy loading con React.lazy', 'React.lazy carga un componente cuando se necesita en lugar de incluirlo al inicio.', lines(['const Settings = lazy(() => import("./Settings"));'])),
+lesson(5, 'suspense', 'Suspense', 'Suspense muestra una interfaz temporal mientras se descarga un componente diferido.', lines(['<Suspense fallback={<p>Cargando...</p>}><Settings /></Suspense>'])),
+lesson(6, 'code-splitting', 'División de código', 'Divide bundles por rutas o funcionalidades grandes para reducir la carga inicial.', lines(['const AdminRoutes = lazy(() => import("./AdminRoutes"));'])),
+lesson(7, 'list-optimization', 'Optimización de listas', 'Usa keys estables y virtualización cuando hay miles de elementos visibles.', lines(['items.map(item => <Row key={item.id} item={item} />)'])),
+lesson(8, 'profiler', 'React DevTools y profiler', 'El profiler identifica renders lentos y explica qué props o estado los provocaron.', lines(['<Profiler id="CourseList" onRender={onRender}><CourseList /></Profiler>'])),
+] };
