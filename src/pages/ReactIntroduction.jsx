@@ -1,6 +1,7 @@
 import { CodeExercise } from '../components/exercises/CodeExercise';
 import { Explanation } from '../components/learning/Explanation';
 import { reactIntroductionLessons } from '../data/reactIntroductionLessons';
+import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const ReactIntroduction = () => {
     return (
@@ -40,7 +41,7 @@ export const ReactIntroduction = () => {
                     </div>
                 </div>
             </main>
-            <footer className="border-t border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">Al terminar podrás crear, estructurar y leer una interfaz React básica. Continúa con el Bloque 3: Props y Comunicación.</footer>
+            <SiteFooter />
         </div>
     );
 };

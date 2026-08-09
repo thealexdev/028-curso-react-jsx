@@ -1,6 +1,7 @@
 import { CodeExercise } from '../components/exercises/CodeExercise';
 import { Explanation } from '../components/learning/Explanation';
 import { advancedHooksLessons } from '../data/advancedHooksLessons';
+import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const AdvancedHooks = () => {
     return (
@@ -10,7 +11,7 @@ export const AdvancedHooks = () => {
                 <section className="border-b border-slate-300 pb-10"><p className="font-mono text-sm font-semibold uppercase tracking-[0.18em] text-indigo-700">Bloque 07 de 13</p><h1 className="mt-4 max-w-4xl text-5xl font-black tracking-tight text-slate-950 sm:text-7xl">Hooks Avanzados</h1><p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Profundiza en referencias, memoización, reducers, contexto y lógica reutilizable para construir componentes React escalables.</p><div className="mt-7 flex flex-wrap gap-3 text-sm"><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">8 lecciones</span><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">8 retos JSX</span><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">CodeMirror</span></div></section>
                 <div className="mt-10 lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12"><aside className="mb-8 lg:mb-0"><nav aria-label="Indice del Bloque 7" className="sticky top-5 rounded-xl border border-slate-200 bg-white p-4 shadow-sm"><p className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.16em] text-slate-500">En esta página</p><ol className="space-y-1">{advancedHooksLessons.map(lesson => <li key={lesson.id}><a className="block rounded-md px-2 py-2 text-sm text-slate-600 hover:bg-indigo-50 hover:text-indigo-800" href={`#${lesson.id}`}><span className="mr-2 font-mono text-xs text-indigo-600">{lesson.number}</span>{lesson.title}</a></li>)}</ol></nav></aside><div>{advancedHooksLessons.map((lesson, index) => <section className={index ? 'border-t border-slate-300 py-14' : 'pb-14'} id={lesson.id} key={lesson.id}><Explanation lesson={lesson} /><CodeExercise exercise={lesson.exercise} /></section>)}</div></div>
             </main>
-            <footer className="border-t border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">Al terminar podrás elegir el hook correcto y organizar estado compartido. Continúa con el Bloque 8: Estilos.</footer>
+            <SiteFooter />
         </div>
     );
 };

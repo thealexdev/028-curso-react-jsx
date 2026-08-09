@@ -1,4 +1,5 @@
 import { courseBlocks } from '../data/courseBlocks';
+import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const LandingPage = () => {
     return (
@@ -63,7 +64,7 @@ export const LandingPage = () => {
                 </section>
             </main>
 
-            <footer className="border-t border-white/10 px-4 py-8 text-center text-sm text-slate-500">React / Ruta. Aprende construyendo.</footer>
+            <SiteFooter dark />
         </div>
     );
 };

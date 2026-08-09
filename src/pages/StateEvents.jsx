@@ -1,6 +1,7 @@
 import { CodeExercise } from '../components/exercises/CodeExercise';
 import { Explanation } from '../components/learning/Explanation';
 import { stateEventsLessons } from '../data/stateEventsLessons';
+import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const StateEvents = () => {
     return (
@@ -18,7 +19,7 @@ export const StateEvents = () => {
                     <div>{stateEventsLessons.map((lesson, index) => <section className={index ? 'border-t border-slate-300 py-14' : 'pb-14'} id={lesson.id} key={lesson.id}><Explanation lesson={lesson} /><CodeExercise exercise={lesson.exercise} /></section>)}</div>
                 </div>
             </main>
-            <footer className="border-t border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">Al terminar podrás construir interfaces reactivas y formularios controlados. Continúa con el Bloque 5: Efectos y Datos Externos.</footer>
+            <SiteFooter />
         </div>
     );
 };

@@ -1,4 +1,5 @@
 import { courseBlocks } from '../data/courseBlocks';
+import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const CourseBlock = () => {
     const blockNumber = Number(
@@ -35,6 +36,7 @@ export const CourseBlock = () => {
                     {nextBlock ? <a className="button-primary" href={`/bloque-${nextBlock.number}`}>Siguiente: {nextBlock.title}</a> : <a className="button-primary" href="/">Volver al inicio</a>}
                 </nav>
             </main>
+            <SiteFooter />
         </div>
     );
 };

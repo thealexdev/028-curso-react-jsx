@@ -1,5 +1,6 @@
 import { CodeExercise } from '../components/exercises/CodeExercise';
 import { Explanation } from '../components/learning/Explanation';
+import { SiteFooter } from '../components/layout/SiteFooter';
 import { fundamentalsLessons } from '../data/fundamentalsLessons';
 
 export const FundamentalsWeb = () => {
@@ -40,7 +41,7 @@ export const FundamentalsWeb = () => {
                     </div>
                 </div>
             </main>
-            <footer className="border-t border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">Completa cada editor antes de pasar a React. El siguiente paso es el Bloque 2: Introducción a React.</footer>
+            <SiteFooter />
         </div>
     );
 };

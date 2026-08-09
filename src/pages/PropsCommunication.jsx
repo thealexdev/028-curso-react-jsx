@@ -1,6 +1,7 @@
 import { CodeExercise } from '../components/exercises/CodeExercise';
 import { Explanation } from '../components/learning/Explanation';
 import { propsCommunicationLessons } from '../data/propsCommunicationLessons';
+import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const PropsCommunication = () => {
     return (
@@ -40,7 +41,7 @@ export const PropsCommunication = () => {
                     </div>
                 </div>
             </main>
-            <footer className="border-t border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">Al terminar podrás diseñar componentes conectados y con responsabilidades claras. Continúa con el Bloque 4: Estado y Eventos.</footer>
+            <SiteFooter />
         </div>
     );
 };

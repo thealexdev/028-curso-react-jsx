@@ -1,6 +1,7 @@
 import { CodeExercise } from '../components/exercises/CodeExercise';
 import { Explanation } from '../components/learning/Explanation';
 import { effectsExternalDataLessons } from '../data/effectsExternalDataLessons';
+import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const EffectsExternalData = () => {
     return (
@@ -13,7 +14,7 @@ export const EffectsExternalData = () => {
                     <div>{effectsExternalDataLessons.map((lesson, index) => <section className={index ? 'border-t border-slate-300 py-14' : 'pb-14'} id={lesson.id} key={lesson.id}><Explanation lesson={lesson} /><CodeExercise exercise={lesson.exercise} /></section>)}</div>
                 </div>
             </main>
-            <footer className="border-t border-slate-200 bg-white px-4 py-8 text-center text-sm text-slate-500">Al terminar podrás cargar y cancelar datos externos de forma segura. Continúa con el Bloque 6: Enrutamiento.</footer>
+            <SiteFooter />
         </div>
     );
 };
