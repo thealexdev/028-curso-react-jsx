@@ -7,6 +7,7 @@ import { StateEvents } from './pages/StateEvents';
 import { EffectsExternalData } from './pages/EffectsExternalData';
 import { Routing } from './pages/Routing';
 import { AdvancedHooks } from './pages/AdvancedHooks';
+import { Styles } from './pages/Styles';
 
 export const App = () => {
     const blockNumber = Number(
@@ -20,6 +21,7 @@ export const App = () => {
     if (blockNumber === 5) return <EffectsExternalData />;
     if (blockNumber === 6) return <Routing />;
     if (blockNumber === 7) return <AdvancedHooks />;
+    if (blockNumber === 8) return <Styles />;
     if (blockNumber >= 2 && blockNumber <= 13) return <CourseBlock />;
 
     return <LandingPage />;
