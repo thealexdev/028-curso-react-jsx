@@ -1,0 +1,11 @@
+const lines = parts => parts.join('\n');
+const lesson = (number, id, title, summary, example) => ({ id, number: String(number).padStart(2, '0'), title, summary, concepts: [['Idea clave', summary], ['Práctica', 'Modifica el ejemplo, comprueba la solución y llévalo a un proyecto React.']], example, exercise: { title: `Practica: ${title}`, instructions: 'Completa el ejemplo siguiendo la estructura mostrada.', language: 'jsx', initialCode: '// Escribe aquí tu solución', solution: example, patterns: ['export|const|function'], hint: 'Revisa el ejemplo guiado y reproduce las partes esenciales.', execution: 'validation' } });
+export const formsBlock = { number: 9, title: 'Formularios', summary: 'Construye formularios accesibles, controlados y validados para flujos reales de aplicación.', lessons: [
+    lesson(1, 'field-validation', 'Validación de campos', 'Valida cada campo según sus reglas antes de aceptar datos.', lines(['const errors = {};', 'if (!email.includes("@")) errors.email = "Correo inválido";'])),
+    lesson(2, 'error-messages', 'Mensajes de error', 'Muestra mensajes específicos junto al campo y relaciónalos de forma accesible.', lines(['{errors.email && <p role="alert">{errors.email}</p>}'])),
+    lesson(3, 'controlled-forms', 'Formularios controlados', 'El estado de React controla value y onChange de cada campo.', lines(['const [email, setEmail] = useState("");', '<input value={email} onChange={event => setEmail(event.target.value)} />'])),
+    lesson(4, 'react-hook-form', 'React Hook Form', 'React Hook Form reduce el código repetitivo y gestiona el registro de campos.', lines(['const { register, handleSubmit } = useForm();', '<input {...register("email")} />'])),
+    lesson(5, 'zod-yup', 'Validación con Zod o Yup', 'Los esquemas centralizan reglas de validación reutilizables.', lines(['const schema = z.object({ email: z.string().email() });'])),
+    lesson(6, 'form-submission', 'Envío de formularios', 'onSubmit evita la recarga y envía datos validados a un servicio.', lines(['const onSubmit = async data => { await saveUser(data); };'])),
+    lesson(7, 'auth-forms', 'Formularios de autenticación', 'Login y registro combinan validación, carga, errores y redirección.', lines(['<form onSubmit={handleSubmit(onSubmit)}><button type="submit">Entrar</button></form>'])),
+] };
