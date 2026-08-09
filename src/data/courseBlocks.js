@@ -1,0 +1,80 @@
+export const courseBlocks = [
+    {
+        number: 1,
+        title: 'Fundamentos Web',
+        description: 'HTML semantico, CSS moderno y JavaScript antes de React.',
+        topics: ['HTML semantico', 'Flexbox, Grid y responsive design', 'JavaScript moderno', 'Destructuring, spread/rest y modulos ES', 'Promesas, async/await y APIs', 'DOM y eventos'],
+    },
+    {
+        number: 2,
+        title: 'Introduccion a React',
+        description: 'Comprende React, JSX y el modelo basado en componentes.',
+        topics: ['Que es React y como crear un proyecto con Vite', 'Estructura de un proyecto React', 'Componentes funcionales', 'Importar y exportar componentes', 'Expresiones en JSX', 'Renderizado condicional, listas y keys'],
+    },
+    {
+        number: 3,
+        title: 'Props y Comunicacion',
+        description: 'Conecta componentes y comparte datos de forma clara.',
+        topics: ['Props y valores por defecto', 'Desestructuracion de props', 'La prop children', 'Comunicacion padre a hijo', 'Callbacks de hijo a padre', 'Elevacion de estado y composicion'],
+    },
+    {
+        number: 4,
+        title: 'Estado y Eventos',
+        description: 'Crea interfaces que responden a las acciones de la persona usuaria.',
+        topics: ['Eventos en React', 'useState', 'Inputs controlados y formularios', 'Estado con objetos y arrays', 'Actualizaciones inmutables', 'Ejercicios de interfaz'],
+    },
+    {
+        number: 5,
+        title: 'Efectos y Datos Externos',
+        description: 'Sincroniza componentes con APIs y efectos secundarios.',
+        topics: ['useEffect y ciclo de vida', 'Dependencias y limpieza de efectos', 'Fetch y peticiones HTTP', 'Estados de carga, error y exito', 'AbortController', 'Renderizado de datos remotos'],
+    },
+    {
+        number: 6,
+        title: 'Enrutamiento',
+        description: 'Organiza una aplicacion de varias paginas con React Router.',
+        topics: ['Routes y Route', 'Link, NavLink y useNavigate', 'Parametros con useParams', 'Rutas dinamicas y anidadas', 'Pagina 404', 'Rutas protegidas'],
+    },
+    {
+        number: 7,
+        title: 'Hooks Avanzados',
+        description: 'Profundiza en referencias, contexto y logica reutilizable.',
+        topics: ['Reglas de los hooks', 'useRef', 'useMemo y useCallback', 'useReducer', 'useContext', 'Hooks personalizados'],
+    },
+    {
+        number: 8,
+        title: 'Estilos',
+        description: 'Diseña interfaces consistentes, responsive y accesibles.',
+        topics: ['CSS global y modular', 'Tailwind CSS', 'Responsive design', 'Estados hover, focus y disabled', 'Tema claro y oscuro', 'Accesibilidad visual'],
+    },
+    {
+        number: 9,
+        title: 'Formularios',
+        description: 'Valida, envia y gestiona formularios de aplicaciones reales.',
+        topics: ['Campos controlados', 'Validacion y mensajes de error', 'React Hook Form', 'Zod o Yup', 'Envio de formularios', 'Formulario de autenticacion'],
+    },
+    {
+        number: 10,
+        title: 'Estado Global y Arquitectura',
+        description: 'Escala el proyecto con una estructura sostenible.',
+        topics: ['Context API', 'Reducers y acciones', 'Zustand o Redux Toolkit', 'Pages, features, components y services', 'Variables de entorno', 'Manejo de errores'],
+    },
+    {
+        number: 11,
+        title: 'Rendimiento',
+        description: 'Mide y evita trabajo innecesario en tu aplicacion.',
+        topics: ['Re-renderizados', 'React.memo', 'useMemo y useCallback con criterio', 'React.lazy y Suspense', 'Division de codigo', 'React DevTools Profiler'],
+    },
+    {
+        number: 12,
+        title: 'Testing',
+        description: 'Asegura que los flujos principales sigan funcionando.',
+        topics: ['Vitest', 'React Testing Library', 'Pruebas de componentes', 'Pruebas de formularios', 'Mocks de APIs', 'Playwright o Cypress'],
+    },
+    {
+        number: 13,
+        title: 'Proyecto Final',
+        description: 'Integra todos los conocimientos en una aplicacion completa.',
+        topics: ['Autenticacion', 'CRUD conectado a una API', 'Rutas protegidas', 'Panel de usuario', 'Estado global y formularios validados', 'Despliegue en Vercel o Netlify'],
+    },
+];

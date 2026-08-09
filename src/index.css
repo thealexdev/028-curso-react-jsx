@@ -1,7 +1,35 @@
-.list-group-item {
-    cursor: pointer !important;
+@import "tailwindcss";
+
+@layer base {
+    body {
+        @apply bg-slate-50 text-slate-800 antialiased;
+    }
 }
 
-.list-group-item:hover {
-    background-color: lavender;
+@utility list-card {
+    @apply divide-y divide-slate-200 overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm;
+}
+
+@utility list-item {
+    @apply p-4;
+}
+
+@utility form-input {
+    @apply w-full rounded-md border border-slate-300 px-3 py-2 outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200;
+}
+
+@utility button-primary {
+    @apply rounded-md bg-indigo-600 px-4 py-2 font-medium text-white hover:bg-indigo-700;
+}
+
+@utility button-secondary {
+    @apply rounded-md bg-slate-600 px-4 py-2 font-medium text-white hover:bg-slate-700;
+}
+
+@utility button-success {
+    @apply rounded-md bg-emerald-600 px-4 py-2 font-medium text-white hover:bg-emerald-700;
+}
+
+@utility button-danger {
+    @apply rounded-md bg-rose-600 px-4 py-2 font-medium text-white hover:bg-rose-700;
 }
