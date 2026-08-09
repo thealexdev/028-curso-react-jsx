@@ -1,0 +1,11 @@
+const lines = parts => parts.join('\n');
+const lesson = (number, id, title, summary, example) => ({ id, number: String(number).padStart(2, '0'), title, summary, concepts: [['Objetivo', summary], ['Práctica', 'Prueba comportamiento observable en lugar de detalles internos.']], example, exercise: { title: `Practica: ${title}`, instructions: 'Completa el ejemplo de prueba.', language: 'jsx', initialCode: '// Escribe aquí tu solución', solution: example, patterns: ['expect|test|describe'], hint: 'Organiza la prueba en preparar, actuar y verificar.', execution: 'validation' } });
+export const testingBlock = { number: 12, title: 'Testing', summary: 'Asegura los flujos importantes de React con pruebas unitarias, de integración y de extremo a extremo.', lessons: [
+lesson(1, 'vitest', 'Pruebas unitarias con Vitest', 'Vitest ejecuta pruebas rápidas y se integra con proyectos Vite.', lines(['import { expect, test } from "vitest";', 'test("suma", () => expect(1 + 1).toBe(2));'])),
+lesson(2, 'rtl', 'React Testing Library', 'Testing Library consulta la interfaz como lo haría una persona usuaria.', lines(['render(<Button />);', 'expect(screen.getByRole("button", { name: "Guardar" })).toBeInTheDocument();'])),
+lesson(3, 'component-tests', 'Pruebas de componentes', 'Prueba que un componente muestra contenido, responde a props y dispara interacciones.', lines(['render(<Greeting name="Ana" />);', 'expect(screen.getByText("Hola, Ana")).toBeVisible();'])),
+lesson(4, 'form-tests', 'Pruebas de formularios', 'Simula escritura y envío para verificar validaciones y resultados.', lines(['await user.type(screen.getByLabelText("Correo"), "ana@example.com");', 'await user.click(screen.getByRole("button", { name: "Enviar" }));'])),
+lesson(5, 'api-mocks', 'Mock de APIs', 'Mock Service Worker o mocks de fetch aíslan las pruebas de la red real.', lines(['server.use(http.get("/api/courses", () => HttpResponse.json([{ id: 1 }])));'])),
+lesson(6, 'route-tests', 'Pruebas de rutas', 'Renderiza rutas en memoria y comprueba la pantalla asociada a cada URL.', lines(['render(<MemoryRouter initialEntries={["/courses/1"]}><App /></MemoryRouter>);'])),
+lesson(7, 'e2e', 'Pruebas end-to-end con Playwright o Cypress', 'E2E valida un flujo completo en un navegador real.', lines(['await page.goto("/");', 'await page.getByRole("link", { name: "Cursos" }).click();'])),
+] };
