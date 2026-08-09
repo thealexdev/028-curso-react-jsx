@@ -1,7 +1,9 @@
 import { courseBlocks } from '../data/courseBlocks';
 
 export const CourseBlock = () => {
-    const blockNumber = Number(window.location.pathname.split('/').pop());
+    const blockNumber = Number(
+        window.location.pathname.match(/^\/bloque-(\d+)$/)?.[1],
+    );
     const block = courseBlocks.find(item => item.number === blockNumber);
     const previousBlock = courseBlocks[blockNumber - 2];
     const nextBlock = courseBlocks[blockNumber];
