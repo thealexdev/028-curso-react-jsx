@@ -9,6 +9,7 @@ const languageExtensions = {
     html: [html()],
     css: [css()],
     javascript: [javascript()],
+    jsx: [javascript({ jsx: true })],
 };
 
 const escapeClosingScript = code => code.replace(/<\/script/gi, '<\\/script');
@@ -110,7 +111,7 @@ export const CodeExercise = ({ exercise }) => {
                         value={code}
                     />
                     <div className="mt-4 flex flex-wrap gap-2">
-                        <button className="button-primary" onClick={runCode} type="button">Ejecutar</button>
+                        {exercise.execution !== 'validation' && <button className="button-primary" onClick={runCode} type="button">Ejecutar</button>}
                         <button className="button-success" onClick={evaluate} type="button">Comprobar</button>
                         <button className="button-secondary" onClick={() => setShowHint(value => !value)} type="button">{showHint ? 'Ocultar pista' : 'Ver pista'}</button>
                         <button className="button-secondary" onClick={restoreInitial} type="button">Restaurar</button>
@@ -121,9 +122,19 @@ export const CodeExercise = ({ exercise }) => {
                     {showSolution && <pre className="mt-4 overflow-x-auto rounded-lg bg-slate-100 p-4 text-sm"><code>{exercise.solution}</code></pre>}
                 </div>
                 <div className="p-5">
-                    <p className="mb-2 font-mono text-xs font-bold uppercase tracking-wide text-slate-500">Vista previa aislada</p>
-                    <iframe className="h-80 w-full rounded-lg border border-slate-300 bg-white" key={runVersion} sandbox="allow-scripts" srcDoc={documentFor(previewExercise)} title={`Resultado de ${exercise.title}`} />
-                    <p className="mt-3 text-xs leading-5 text-slate-500">El código se ejecuta en un iframe aislado y no puede acceder a la aplicación principal.</p>
+                    {exercise.execution === 'validation' ? (
+                        <div className="flex h-80 flex-col justify-center rounded-lg border border-dashed border-slate-300 bg-slate-50 p-6">
+                            <p className="font-mono text-xs font-bold uppercase tracking-wide text-indigo-700">Validacion de estructura</p>
+                            <h4 className="mt-3 text-xl font-bold">Este reto necesita React y Vite</h4>
+                            <p className="mt-3 leading-7 text-slate-600">Usa “Comprobar” para validar los conceptos. Copia el código en un proyecto Vite para ejecutarlo con React.</p>
+                        </div>
+                    ) : (
+                        <>
+                            <p className="mb-2 font-mono text-xs font-bold uppercase tracking-wide text-slate-500">Vista previa aislada</p>
+                            <iframe className="h-80 w-full rounded-lg border border-slate-300 bg-white" key={runVersion} sandbox="allow-scripts" srcDoc={documentFor(previewExercise)} title={`Resultado de ${exercise.title}`} />
+                            <p className="mt-3 text-xs leading-5 text-slate-500">El código se ejecuta en un iframe aislado y no puede acceder a la aplicación principal.</p>
+                        </>
+                    )}
                 </div>
             </div>
         </section>
