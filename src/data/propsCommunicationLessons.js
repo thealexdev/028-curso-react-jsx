@@ -62,3 +62,37 @@ export const propsCommunicationLessons = [
         exercise: validationExercise('Compón una página con Layout', 'Usa Layout y children para envolver el contenido principal de la página.', ['const Layout = ({ children }) => <main>{children}</main>;', '', 'export const Page = () => (', '  {/* usa Layout aquí */}', ');'], ['const Layout = ({ children }) => <main>{children}</main>;', '', 'export const Page = () => (', '  <Layout>', '    <h1>Props y Comunicación</h1>', '    <p>Componentes compuestos.</p>', '  </Layout>', ');'], ['<Layout>', '</Layout>', 'children'], 'Layout ya recibe children. Abre <Layout>, añade contenido dentro y ciérralo.'),
     },
 ];
+
+const explanations = {
+    props: ['Una prop es un dato que un componente recibe desde quien lo usa. El hijo la puede leer para decidir qué mostrar, pero no debe cambiarla.', 'Esta dirección única, padre a hijo, hace más fácil saber de dónde viene cada dato y reutilizar el mismo componente con valores distintos.'],
+    'default-props': ['No todos los datos son obligatorios. Un valor por defecto mantiene útil el componente cuando una prop no llega.', 'El valor enviado por el padre siempre tiene prioridad sobre el valor por defecto.'],
+    'destructuring-props': ['Desestructurar declara de forma visible qué datos necesita el componente. Evita repetir props.nombre y mejora la lectura.', 'Extrae solo las propiedades que realmente necesita la interfaz.'],
+    children: ['children es la prop que React crea con el contenido entre la apertura y el cierre de un componente.', 'El componente aporta la estructura y quien lo usa decide el contenido. Esto es composición, no una excepción especial.'],
+    'parent-child': ['El padre conserva el dato compartido y lo baja por props. El hijo lo presenta sin convertirse en otra fuente de verdad.', 'Cuando el dato cambia arriba, React vuelve a renderizar al hijo con el nuevo valor.'],
+    callbacks: ['Un hijo no modifica los datos del padre. En su lugar recibe una función como prop y la llama cuando ocurre su evento.', 'Nombres como onSelect indican que se espera una acción; handleSelect indica que la función la gestiona.'],
+    'lifting-state': ['Si dos componentes necesitan el mismo dato, ese dato debe vivir en su ancestro común más cercano.', 'El valor baja por props y las funciones para pedir cambios también. Así evitas copias que se desincronizan.'],
+    composition: ['Combinar componentes pequeños es la forma habitual de crear interfaces grandes en React.', 'Una API pequeña de props y children es más fácil de reutilizar y entender que una jerarquía compleja.'],
+};
+
+const commonMistakes = ['Modificar una prop dentro del componente hijo.', 'Duplicar el mismo dato en dos componentes hermanos.', 'Ejecutar un callback durante el render en lugar de pasarlo al evento.'];
+
+propsCommunicationLessons.forEach(lesson => {
+    const original = lesson.exercise;
+    lesson.category = 'Flujo de datos';
+    lesson.objectives = [`Explicar el papel de ${lesson.title.toLowerCase()} en React.`, 'Escribir una solución pequeña y comprobar su flujo de datos.', 'Reconocer una implementación que rompería el flujo unidireccional.'];
+    lesson.explanation = explanations[lesson.id];
+    lesson.commonMistakes = commonMistakes;
+    lesson.exercises = [
+        { ...original, id: `${lesson.id}-1`, level: '1. Analiza', title: `Lee el ejemplo de ${lesson.title}`, instructions: `Reescribe la solución guiada y explica qué recibe cada componente. ${original.instructions}` },
+        { ...original, id: `${lesson.id}-2`, level: '2. Aplica' },
+        { ...original, id: `${lesson.id}-3`, level: '3. Corrige', title: `Repara el flujo de ${lesson.title}`, instructions: `Parte de la plantilla y elimina cualquier dato duplicado. ${original.instructions}` },
+        { ...original, id: `${lesson.id}-4`, level: '4. Construye', title: `Construye con ${lesson.title}`, instructions: `Sin consultar el ejemplo, crea la solución desde los requisitos: ${original.instructions}` },
+    ];
+});
+
+propsCommunicationLessons.finalChallenge = {
+    title: 'Selector de cursos compuesto',
+    summary: 'Conecta un padre que conserva la selección con componentes hijos que reciben datos y notifican una acción mediante callbacks.',
+    requirements: ['Crea CourseCard y CourseList.', 'Pasa un curso por props.', 'Pasa onSelect como callback.', 'Renderiza cursos con map y key.', 'Muestra el curso seleccionado en App.'],
+    exercise: validationExercise('Construye el selector', 'Compón App, CourseList y CourseCard. Usa props para bajar course y onSelect; el hijo debe llamar onSelect al hacer click.', ['import { useState } from \'react\';', '', "const courses = [{ id: 1, title: 'JSX' }, { id: 2, title: 'Props' }];", '', '// Crea CourseCard y CourseList', '', 'export const App = () => {', '  // conserva selectedCourse', '  return <main>{/* lista y selección */}</main>;', '};'], ['import { useState } from \'react\';', '', "const courses = [{ id: 1, title: 'JSX' }, { id: 2, title: 'Props' }];", '', 'const CourseCard = ({ course, onSelect }) => <button onClick={() => onSelect(course)}>{course.title}</button>;', 'const CourseList = ({ courses, onSelect }) => <section>{courses.map(course => <CourseCard key={course.id} course={course} onSelect={onSelect} />)}</section>;', '', 'export const App = () => {', '  const [selectedCourse, setSelectedCourse] = useState(null);', '  return <main><CourseList courses={courses} onSelect={setSelectedCourse} /><p>{selectedCourse ? selectedCourse.title : \'Elige un curso\'}</p></main>;', '};'], ['useState', 'CourseCard', 'CourseList', 'onSelect', 'map', 'key', 'course.id'], 'Crea primero la tarjeta, después la lista y por último el estado compartido en App.'),
+};
