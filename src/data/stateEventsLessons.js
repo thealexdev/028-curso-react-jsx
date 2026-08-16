@@ -61,3 +61,35 @@ export const stateEventsLessons = [
         exercise: exercise('Alterna la visibilidad', 'Declara visible con useState(true), agrega un botón y muestra el mensaje solo cuando visible sea true.', ['export const Visibility = () => {', '  // estado visible', '  return <section>{/* botón y mensaje */}</section>;', '};'], ['export const Visibility = () => {', '  const [visible, setVisible] = useState(true);', '  return <section>', '    <button onClick={() => setVisible(!visible)}>Alternar</button>', '    {visible && <p>Contenido visible</p>}', '  </section>;', '};'], ['useState\\(true\\)', 'setVisible', '&&', 'visible'], 'El operador && renderiza el párrafo solo si visible es true.'),
     },
 ];
+
+const explanations = {
+    events: ['Los eventos enlazan una acción de la persona con una función. React usa nombres en camelCase, como onClick, y espera una referencia a la función.', 'Pasa handleClick, no handleClick(). La segunda forma ejecutaría la función durante el renderizado.'],
+    'use-state': ['Una variable normal se reinicia en cada renderizado. useState conserva un valor y su setter pide a React que vuelva a calcular la interfaz.', 'El estado debe contener solo los datos que pueden cambiar y que afectan lo que se muestra.'],
+    'controlled-inputs': ['Un input controlado obtiene su valor desde el estado. Cada cambio dispara onChange, que actualiza ese estado.', 'Esto crea una fuente única de verdad: el texto que ves y el dato de tu componente siempre coinciden.'],
+    forms: ['React controla el envío en onSubmit. preventDefault evita la recarga para que tu componente decida qué hacer con los datos.', 'Valida antes de enviar y comunica el resultado a la persona usuaria.'],
+    'objects-arrays': ['Los objetos y arrays del estado no se modifican directamente. Crea una nueva estructura que conserve lo anterior y cambie solo lo necesario.', 'map actualiza elementos; filter elimina elementos. Ambos devuelven arrays nuevos.'],
+    'immutable-updates': ['Una nueva referencia permite a React detectar claramente un cambio. El spread copia antes de añadir o sobrescribir datos.', 'Usa el actualizador funcional cuando el siguiente valor depende del valor anterior.'],
+    'state-rendering': ['La interfaz es una descripción de cada estado posible: vacío, con datos, cargando o con error.', 'Deriva valores como tasks.length en vez de guardarlos en otro estado.'],
+    practice: ['Las interacciones pequeñas consolidan el modelo: estado actual, evento que pide cambio e interfaz que se recalcula.', 'Antes de codificar, di en voz alta cuál es el estado y qué evento lo cambiará.'],
+};
+
+stateEventsLessons.forEach(lesson => {
+    const original = lesson.exercise;
+    lesson.category = 'Interactividad';
+    lesson.objectives = [`Explicar cómo ${lesson.title.toLowerCase()} afecta al renderizado.`, 'Conectar una interacción con una actualización de estado.', 'Evitar mutaciones directas y datos duplicados.'];
+    lesson.explanation = explanations[lesson.id];
+    lesson.commonMistakes = ['Modificar el estado directamente.', 'Ejecutar un handler durante el renderizado.', 'Guardar en estado un valor que puede calcularse desde otro dato.'];
+    lesson.exercises = [
+        { ...original, id: `${lesson.id}-1`, level: '1. Analiza', title: `Lee el flujo de ${lesson.title}`, instructions: `Identifica estado, evento y resultado visible. ${original.instructions}` },
+        { ...original, id: `${lesson.id}-2`, level: '2. Aplica' },
+        { ...original, id: `${lesson.id}-3`, level: '3. Corrige', title: `Repara ${lesson.title}`, instructions: `Parte de la plantilla, busca una actualización insegura y corrígela. ${original.instructions}` },
+        { ...original, id: `${lesson.id}-4`, level: '4. Construye', title: `Construye con ${lesson.title}`, instructions: `Sin mirar el ejemplo, crea una solución que cumpla estos requisitos: ${original.instructions}` },
+    ];
+});
+
+stateEventsLessons.finalChallenge = {
+    title: 'Lista de tareas interactiva',
+    summary: 'Construye el núcleo de una lista de tareas: campo controlado, formulario sin recarga, actualización inmutable y un estado vacío útil.',
+    requirements: ['Guarda el texto del input en estado.', 'Usa onSubmit y preventDefault.', 'Añade tareas con un actualizador funcional.', 'Renderiza tareas con map y una key.', 'Muestra un estado vacío cuando no existan tareas.'],
+    exercise: exercise('Construye la lista', 'Completa TaskApp con estado para texto y tareas. Al enviar, añade una tarea sin mutar el array y limpia el campo.', ['import { useState } from \'react\';', '', 'export const TaskApp = () => {', '  // estado para text y tasks', '  // handleSubmit', '  return <main>{/* formulario y lista */}</main>;', '};'], ['import { useState } from \'react\';', '', 'export const TaskApp = () => {', '  const [text, setText] = useState(\'\');', '  const [tasks, setTasks] = useState([]);', '  const handleSubmit = event => {', '    event.preventDefault();', '    if (!text.trim()) return;', '    setTasks(current => [...current, { id: Date.now(), title: text }]);', '    setText(\'\');', '  };', '  return <main><form onSubmit={handleSubmit}><input value={text} onChange={event => setText(event.target.value)} /><button>Añadir</button></form>{tasks.length === 0 ? <p>No hay tareas.</p> : <ul>{tasks.map(task => <li key={task.id}>{task.title}</li>)}</ul>}</main>;', '};'], ['useState', 'onSubmit', 'preventDefault', 'setTasks', 'current', 'map', 'key', 'tasks.length'], 'Construye por capas: estado, handler, formulario controlado y renderizado de la lista.'),
+};
