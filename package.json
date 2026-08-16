@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
+    "deploy": "npm run build && surge dist curso-react-jsx.surge.sh",
     "lint": "eslint .",
     "preview": "vite preview"
   },
