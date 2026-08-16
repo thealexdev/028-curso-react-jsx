@@ -1,9 +1,14 @@
-import { CodeExercise } from '../components/exercises/CodeExercise';
+import { useState } from 'react';
+import { PracticeSet } from '../components/exercises/PracticeSet';
 import { Explanation } from '../components/learning/Explanation';
+import { FinalChallenge } from '../components/learning/FinalChallenge';
 import { reactIntroductionLessons } from '../data/reactIntroductionLessons';
 import { SiteFooter } from '../components/layout/SiteFooter';
 
 export const ReactIntroduction = () => {
+    const [completed, setCompleted] = useState([]);
+    const markComplete = id => setCompleted(ids => ids.includes(id) ? ids : [...ids, id]);
+    const totalExercises = reactIntroductionLessons.reduce((total, lesson) => total + lesson.exercises.length, 0) + 1;
     return (
         <div className="min-h-screen bg-stone-100 text-slate-900">
             <header className="border-b border-slate-200 bg-white">
@@ -17,8 +22,8 @@ export const ReactIntroduction = () => {
                 <section className="border-b border-slate-300 pb-10">
                     <p className="font-mono text-sm font-semibold uppercase tracking-[0.18em] text-indigo-700">Bloque 02 de 13</p>
                     <h1 className="mt-4 max-w-4xl text-5xl font-black tracking-tight text-slate-950 sm:text-7xl">Introduccion a React</h1>
-                    <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Aprende cómo React organiza una interfaz mediante componentes y JSX. Cada lección contiene documentación, un ejemplo y un reto de código editable con CodeMirror.</p>
-                    <div className="mt-7 flex flex-wrap gap-3 text-sm"><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">9 lecciones</span><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">9 retos JSX</span><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">CodeMirror</span></div>
+                    <p className="mt-5 max-w-3xl text-lg leading-8 text-slate-600">Da el salto de páginas estáticas a interfaces declarativas. Comprende cada pieza de React, practícala en pequeño y termina construyendo una pantalla compuesta por componentes.</p>
+                    <div className="mt-7 flex flex-wrap gap-3 text-sm"><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">6 lecciones</span><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">{totalExercises} prácticas y reto final</span><span className="rounded-full bg-indigo-100 px-3 py-1 font-medium text-indigo-800">{completed.length} completadas</span></div>
                 </section>
 
                 <div className="mt-10 lg:grid lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-12">
@@ -27,6 +32,7 @@ export const ReactIntroduction = () => {
                             <p className="mb-3 font-mono text-xs font-bold uppercase tracking-[0.16em] text-slate-500">En esta página</p>
                             <ol className="space-y-1">
                                 {reactIntroductionLessons.map(lesson => <li key={lesson.id}><a className="block rounded-md px-2 py-2 text-sm text-slate-600 hover:bg-indigo-50 hover:text-indigo-800" href={`#${lesson.id}`}><span className="mr-2 font-mono text-xs text-indigo-600">{lesson.number}</span>{lesson.title}</a></li>)}
+                                <li><a className="block rounded-md px-2 py-2 text-sm font-bold text-slate-700 hover:bg-indigo-50" href="#reto-final">Reto final</a></li>
                             </ol>
                         </nav>
                     </aside>
@@ -35,9 +41,10 @@ export const ReactIntroduction = () => {
                         {reactIntroductionLessons.map((lesson, index) => (
                             <section className={index ? 'border-t border-slate-300 py-14' : 'pb-14'} id={lesson.id} key={lesson.id}>
                                 <Explanation lesson={lesson} />
-                                <CodeExercise exercise={lesson.exercise} />
+                                <PracticeSet completedExercises={completed} lesson={lesson} onComplete={markComplete} />
                             </section>
                         ))}
+                        <FinalChallenge challenge={reactIntroductionLessons.finalChallenge} completed={completed.includes('react-final')} onComplete={() => markComplete('react-final')} />
                     </div>
                 </div>
             </main>

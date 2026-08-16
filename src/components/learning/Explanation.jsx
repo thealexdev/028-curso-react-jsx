@@ -4,7 +4,7 @@ export const Explanation = ({ lesson }) => {
         <>
             <div className="grid gap-6 xl:grid-cols-[minmax(0,1fr)_16rem]">
                 <div>
-                    <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-indigo-700">{lesson.number} / Fundamentos</p>
+                    <p className="font-mono text-sm font-bold uppercase tracking-[0.16em] text-indigo-700">{lesson.number} / {lesson.category ?? 'Fundamentos'}</p>
                     <h2 className="mt-2 text-3xl font-black tracking-tight sm:text-4xl">{lesson.title}</h2>
                     <p className="mt-4 max-w-3xl text-lg leading-8 text-slate-600">{lesson.summary}</p>
                 </div>
