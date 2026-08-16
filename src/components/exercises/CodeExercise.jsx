@@ -14,6 +14,17 @@ const languageExtensions = {
 
 const escapeClosingScript = code => code.replace(/<\/script/gi, '<\\/script');
 
+const matchesPattern = (code, pattern) => {
+    // Lesson data is plain text, so restore whitespace tokens before compiling it.
+    const normalizedPattern = pattern.replace(/s([*+?])/g, '\\s$1');
+
+    try {
+        return new RegExp(normalizedPattern, 'i').test(code);
+    } catch {
+        return code.includes(pattern);
+    }
+};
+
 const consoleBridge = `
 <script>
   const output = document.querySelector('#console-output');
@@ -49,7 +60,7 @@ const documentFor = exercise => {
     return `<!doctype html><html><head>${baseStyles}</head><body>${exercise.preview ?? ''}<div id="console-output">Salida de consola:</div>${consoleBridge}<script>${escapeClosingScript(exercise.initialCode)}</script></body></html>`;
 };
 
-export const CodeExercise = ({ exercise }) => {
+export const CodeExercise = ({ exercise, onComplete }) => {
     const [code, setCode] = useState(exercise.initialCode);
     const [executedCode, setExecutedCode] = useState(exercise.initialCode);
     const [result, setResult] = useState(null);
@@ -58,12 +69,11 @@ export const CodeExercise = ({ exercise }) => {
     const [runVersion, setRunVersion] = useState(0);
 
     const evaluate = () => {
-        const completed = exercise.patterns.every(pattern =>
-            new RegExp(pattern, 'i').test(code),
-        );
+        const completed = exercise.patterns.every(pattern => matchesPattern(code, pattern));
+        if (completed) onComplete?.();
         setResult(
             completed
-                ? { type: 'success', message: 'Buen trabajo. Tu solución contiene los conceptos necesarios.' }
+                ? { type: 'success', message: 'Buen trabajo. Cumpliste los criterios de esta práctica. Ejecuta el código y explica por qué funciona.' }
                 : { type: 'error', message: 'Aún faltan partes de la solución. Usa la pista y vuelve a comprobar.' },
         );
     };
@@ -93,7 +103,7 @@ export const CodeExercise = ({ exercise }) => {
     return (
         <section className="mt-8 overflow-hidden rounded-xl border border-slate-300 bg-white shadow-sm">
             <div className="border-b border-slate-200 bg-slate-50 px-5 py-4">
-                <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-indigo-700">Ejercicio de codigo / {exercise.language}</p>
+                <p className="font-mono text-xs font-bold uppercase tracking-[0.16em] text-indigo-700">{exercise.level ?? 'Ejercicio'} / {exercise.language}</p>
                 <h3 className="mt-1 text-xl font-bold">{exercise.title}</h3>
                 <p className="mt-2 text-slate-600">{exercise.instructions}</p>
             </div>

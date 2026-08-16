@@ -14,6 +14,20 @@ export const Explanation = ({ lesson }) => {
                 </div>
             </div>
 
+            <section className="mt-8 max-w-3xl" aria-labelledby={`${lesson.id}-goal`}>
+                <h3 className="text-lg font-bold" id={`${lesson.id}-goal`}>Al terminar podrás</h3>
+                <ul className="mt-3 space-y-2 text-slate-700">
+                    {lesson.objectives.map(objective => <li className="flex gap-2" key={objective}><span className="font-bold text-indigo-700">-</span>{objective}</li>)}
+                </ul>
+            </section>
+
+            <section className="mt-8 max-w-3xl" aria-labelledby={`${lesson.id}-explanation`}>
+                <h3 className="text-lg font-bold" id={`${lesson.id}-explanation`}>Antes de escribir código</h3>
+                <div className="mt-3 space-y-3 leading-7 text-slate-700">
+                    {lesson.explanation.map(paragraph => <p key={paragraph}>{paragraph}</p>)}
+                </div>
+            </section>
+
             <section className="mt-8" aria-labelledby={`${lesson.id}-concepts`}>
                 <h3 className="text-lg font-bold" id={`${lesson.id}-concepts`}>Conceptos clave</h3>
                 <div className="mt-4 grid gap-4 md:grid-cols-2">
@@ -29,6 +43,13 @@ export const Explanation = ({ lesson }) => {
             <section className="mt-8" aria-labelledby={`${lesson.id}-example`}>
                 <h3 className="text-lg font-bold" id={`${lesson.id}-example`}>Ejemplo guiado</h3>
                 <pre className="mt-3 overflow-x-auto rounded-xl bg-slate-950 p-5 text-sm leading-6 text-slate-100"><code>{lesson.example}</code></pre>
+            </section>
+
+            <section className="mt-8 max-w-3xl rounded-xl border border-amber-200 bg-amber-50 p-5" aria-labelledby={`${lesson.id}-mistakes`}>
+                <h3 className="font-bold text-amber-950" id={`${lesson.id}-mistakes`}>Errores frecuentes</h3>
+                <ul className="mt-3 space-y-2 text-sm leading-6 text-amber-900">
+                    {lesson.commonMistakes.map(mistake => <li key={mistake}>- {mistake}</li>)}
+                </ul>
             </section>
         </>
     );
